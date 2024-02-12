@@ -29,4 +29,4 @@ class Posts(BaseModel, Base):
     description = Column(String(1024), nullable=True)
     post_id = Column(String(128), ForeignKey("post.id"), nullable=False)
     user = relationship("User", backref="Posts", cascade="delete")
-    settings = relationship("Settings", backref="Posts", cascade="delete")
+    settings = relationship("Settings", backref="posts", cascade="delete")

@@ -38,9 +38,9 @@ class DBStorage:
         Return: Dict ofqueried classes in the format <class name>.<obj id> = obj.
         """
         if cls is None:
-            objs =self.__session.query(Posts).all()
+            objs =self.__session.query(User).all()
             objs.extend(self.__session.query(Settings).all())
-            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Posts).all())
         else:
             if type(cls) == str:
                 cls = eval(cls)

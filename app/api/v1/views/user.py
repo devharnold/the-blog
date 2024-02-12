@@ -59,11 +59,27 @@ def put_user(user_id):
     if not request.get_json():
         abort(400, description="Not a json")
 
-    ignore = ['id', 'email', 'created_at', 'updated_at']
+    ignore = ['id', 'email', 'username', 'created_at', 'updated_at']
 
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore:
             setattr(user, key, value)
+    storage.save()
+    return make_response(jsonify(user.to_dict()), 200)
+
+@app_views.route('/user/<user_id>', methods=['PUT'])
+def change_username(user_id):
+    """Updates the username of a given user with the specific id"""
+    user = storage.get(User, user_id)
+    if not user:
+        abort(404)
+    if not request.get_json():
+        abort(400, description="Not a json")
+
+    ignore = ['id', 'email', 'username', 'created_at', 'updated_at']
+    data = request.get_json()
+    for key, value in data.items():
+        setattr(user, key, value)
     storage.save()
     return make_response(jsonify(user.to_dict()), 200)

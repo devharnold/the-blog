@@ -48,7 +48,7 @@ def post_setting():
     return make_response(jsonify(instance.to_dict()), 201)
 
 @app_views.route('/settings/<setting_id>', method=['PUT'])
-def update_post(setting_id):
+def update_setting(setting_id):
     """Updates a user's post based on the specific ID"""
     setting = storage.get(Settings, setting_id)
     if not setting:
