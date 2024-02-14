@@ -3,6 +3,7 @@
 
 from models import storage
 from api.v1.views import app_views
+from api.v1 import v1
 from os import environ
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
@@ -11,7 +12,7 @@ from flasgger.utils import swag_from
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-app.register_blueprint(app_views)
+app.register_blueprint(v1)
 cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 @app.teardown_appcontext

@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """handling all default Restful API actions for user"""
+from flask import Flask, app
 from models.user import User
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
-@app_views.route('/user', methods=['GET'])
+@app_views.route('/user', methods=['GET'], strict_slashes=False)
 def get_user():
     """Retrieves the list of the User objects"""
     all_users = storage.all(User).values()
@@ -14,7 +15,7 @@ def get_user():
         list_users.append(user.to_dict())
     return jsonify(list_users)
 
-@app_views.route('/user/<user_id>', methods=['GET'])
+@app_views.route('/user/<user_id>', methods=['GET'], strict_slashes=False)
 def get_user(user_id):
     """Retrieves list of users based on their IDs"""
     user = storage.get(User, user_id)
@@ -22,7 +23,7 @@ def get_user(user_id):
         abort(404)
     return jsonify(user.to_dict())
 
-@app_views.route('/user/<user_id>', methods=['DELETE'])
+@app_views.route('/user/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """Deletes a user object"""
     user = storage.get(User, user_id)
@@ -33,7 +34,7 @@ def delete_user(user_id):
 
     return make_response(jsonify({}), 200)
 
-@app_views.route('/user', methods=['POST'])
+@app_views.route('/user', methods=['POST'], strict_slashes=False)
 def post_user():
     """Creates a user object"""
     if not request.get_json():
@@ -49,7 +50,7 @@ def post_user():
     instance.save()
     return make_response(jsonify(instance.to_dict()), 201)
 
-@app_views.route('/user/<user_id>', methods=['PUT'])
+@app_views.route('/user/<user_id>', methods=['PUT'], strict_slashes=False)
 def put_user(user_id):
     """Updates a user's object in relation to the user id"""
     user = storage.get(User, user_id)
@@ -68,7 +69,7 @@ def put_user(user_id):
     storage.save()
     return make_response(jsonify(user.to_dict()), 200)
 
-@app_views.route('/user/<user_id>', methods=['PUT'])
+@app_views.route('/user/<user_id>', methods=['PUT'], strict_slashes=False)
 def change_username(user_id):
     """Updates the username of a given user with the specific id"""
     user = storage.get(User, user_id)
@@ -83,3 +84,7 @@ def change_username(user_id):
         setattr(user, key, value)
     storage.save()
     return make_response(jsonify(user.to_dict()), 200)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

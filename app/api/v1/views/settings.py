@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """handles all default Restful API actions for settings"""
+from flask import Flask, app
 from models.settings import Settings
 from models import storage
 from api.v1.views import app_views
 from flask import request, make_response, jsonify, abort
+
 
 @app_views.route('/settings', method=['GET'])
 def get_posts():
@@ -63,3 +65,7 @@ def update_setting(setting_id):
             setattr(setting, key, value)
     storage.save()
     return make_response(jsonify(setting.to_dict()), 200)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

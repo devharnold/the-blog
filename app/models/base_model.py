@@ -6,6 +6,7 @@ import sys
 import datetime
 import models
 import uuid
+from flask import app
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, DateTime, String
 
@@ -54,3 +55,6 @@ class BaseModel:
         """Returns a string representation of the instance"""
         d = self.__dict__.cop
         return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
+    
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

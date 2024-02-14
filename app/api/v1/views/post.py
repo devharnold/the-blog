@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """handles all default Restful API actions for posts"""
+from flask import Flask, app
 from models.posts import Posts
 from models import storage
 from api.v1.views import app_views
 from flask import request, make_response, jsonify, abort
+
 
 @app_views.route('/posts', method=['GET'])
 def get_posts():
@@ -63,3 +65,6 @@ def update_post(post_id):
             setattr(post, key, value)
     storage.save()
     return make_response(jsonify(post.to_dict()), 200)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
