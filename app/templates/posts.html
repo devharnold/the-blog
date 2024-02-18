@@ -52,7 +52,7 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="search-content" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="search-posts" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
           <div id="searchResults"></div>
@@ -64,7 +64,6 @@
             document.addEventListener('DOMContentLoaded', function() {
                 fetchPosts();
             });
-
             function fetchPosts() {
                 fetch('/get_post')
                 .then(response => response.json())
@@ -80,9 +79,10 @@
                 })
                 .catch(error => console.error('Error fetching posts:', error));
             }
+
             function searchContent() {
                 var keyword = document.getElementById('searchInput').value.toLowerCase();
-                var content = document.getElementByID('content');
+                var content = document.getElementById('content');
                 var elements = content.getElementsByTagName('div');
                 var matchedElements = [];
 
@@ -127,7 +127,15 @@
     <script>
         document.getElementById("postForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            const formData = new FormData(this);
+
+            var title = document.getElementById('title').value;
+            var content = document.getElementById('content').value;
+
+            var postData = {
+                title: title,
+                content: content
+            }
+            // const formData = new FormData(this);
             fetch("/create_post", {
                 method: "POST",
                 body: formData

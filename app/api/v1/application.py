@@ -41,5 +41,5 @@ Swagger(app)
 
 if __name__ == "__main__":
     host = environ.get('THEBLOG_API_HOST', '0.0.0.0')
-    port = int(environ.get('THEBLOG_API_PORT', '5000'))
+    port = int(environ.get('THEBLOG_API_PORT', '5500'))
     app.run(host=host, port=port, threaded=True)

@@ -3,8 +3,8 @@
 Defines the Posts class
 """
 import models
-from models.base_model import BaseModel
-from models.base_model import Base
+from models.basemodel import BaseModel
+from models.basemodel import Base
 from os import getenv
 import sqlalchemy
 from sqlalchemy import ForeignKey, Column, String, Table, Integer, Float

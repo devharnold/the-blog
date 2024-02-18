@@ -7,7 +7,7 @@ import json
 import models
 from models.settings import Settings
 from models.posts import Posts
-from models.base_model import BaseModel, Base
+from models.basemodel import BaseModel, Base
 from flask import app
 from models.user import User
 from hashlib import md5
@@ -101,4 +101,4 @@ class FileStorage:
         return count
     
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5500, debug=True)

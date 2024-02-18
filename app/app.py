@@ -1,5 +1,6 @@
 #!usr/bin/python3
-from models.base_model import BaseModel, Base
+from models.basemodel import BaseModel
+from models.basemodel import Base
 from flask import Flask, render_template
 from api.v1.views import app_views
 
