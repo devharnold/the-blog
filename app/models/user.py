@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 """Defines the User class"""
-from models.base_model import Base
-from models.base_model import BaseModel
+from flask import Flask
+from models.basemodel import Base
+from models.basemodel import BaseModel
 from sqlalchemy import Column, String, ForeignKey
 import sqlalchemy
 from sqlalchemy.orm import relationship
+
+app = Flask(__name__)
 
 class User(BaseModel, Base):
     """Represents a MySQL db for User
@@ -19,6 +22,9 @@ class User(BaseModel, Base):
     __tablename__ = "users"
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
-    full_name = Column(String(128))
+    full_name = Column(String(128), nullable=False)
     posts = relationship("Posts", backref="user", cascade="delete")
     settings = relationship("Settings", backref="user", cascade="delete")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

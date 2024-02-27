@@ -67,4 +67,4 @@ def update_post(post_id):
     return make_response(jsonify(post.to_dict()), 200)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5500, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

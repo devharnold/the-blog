@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from models.posts import Posts
 from models.settings import Settings
 from models.user import User
-from flask import app
+from flask import Flask, app
 from models.basemodel import BaseModel,Base
 from models.file_storage import FileStorage
 from sqlalchemy.orm import relationships, scoped_session, sessionmaker
@@ -74,4 +74,4 @@ class DBStorage:
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5500, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

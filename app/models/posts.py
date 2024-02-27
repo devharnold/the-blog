@@ -2,6 +2,7 @@
 """
 Defines the Posts class
 """
+from flask import Flask
 import models
 from models.basemodel import BaseModel
 from models.basemodel import Base
@@ -9,6 +10,8 @@ from os import getenv
 import sqlalchemy
 from sqlalchemy import ForeignKey, Column, String, Table, Integer, Float
 from sqlalchemy.orm import relationship
+
+app = Flask(__name__)
 
 
 if models.storage_t == 'db':
@@ -30,3 +33,6 @@ class Posts(BaseModel, Base):
     post_id = Column(String(128), ForeignKey("post.id"), nullable=False)
     user = relationship("User", backref="Posts", cascade="delete")
     settings = relationship("Settings", backref="posts", cascade="delete")
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

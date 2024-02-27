@@ -1,4 +1,4 @@
-#!/home/arnoldhenry/the_blog/the-blog/venv/bin/python3
+#!/home/arnold/theblog/the-blog/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
